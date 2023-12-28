@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: AppTheme(selectedColor: 2).theme(), // To use a custom theme.
+        theme: AppTheme(selectedColor: 1).theme(), // To use a custom theme.
         title: 'Yes No',
         home: const ChatScreen());
   }
