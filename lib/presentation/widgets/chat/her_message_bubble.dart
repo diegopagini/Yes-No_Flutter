@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no/domain/entities/message.dart';
 import 'package:yes_no/presentation/widgets/chat/image_bubble.dart';
 
 class HerMessageBubble extends StatelessWidget {
-  const HerMessageBubble({super.key});
+  final Message message;
+
+  const HerMessageBubble({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +20,11 @@ class HerMessageBubble extends StatelessWidget {
             borderRadius: BorderRadius.circular(18),
             color: colors.secondary,
           ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Text(
-              'Hola Mundo',
-              style: TextStyle(color: Colors.white),
+              message.text,
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),

@@ -13,6 +13,7 @@ class ChatView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // With the watch method the context will be waiting for the "notifyListeners" method to be updated.
     final chatProvider = context.watch<ChatProvider>();
 
     // "SafeArea" To leave space for dedault mobile behaviors on top and bottom.
@@ -25,16 +26,24 @@ class ChatView extends StatelessWidget {
             Expanded(
                 // To make the for.
                 child: ListView.builder(
+              controller: chatProvider
+                  .chatScrollController, // This controller comes from my provider.
               itemCount: chatProvider.messages.length,
               itemBuilder: (context, index) {
                 final message = chatProvider.messages[index];
 
                 return (message.fromWho == FromWho.hers)
-                    ? const HerMessageBubble()
-                    : const MyMessageBubble();
+                    ? HerMessageBubble(message: message)
+                    : MyMessageBubble(message: message);
               },
             )),
-            const MessageFieldBox(),
+            MessageFieldBox(
+              onValue: (value) => chatProvider.sendMessage(value),
+            ),
+            // The short way of doing this is this one:
+            // MessageFieldBox(
+            //   onValue: chatProvider.sendMessage,
+            // ),
           ],
         ),
       ),
